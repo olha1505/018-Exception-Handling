@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 04</title>
+</head>
+
+<body>
+    <script>
+        /*
+        Завдання:
+        Створіть користувацький клас винятку DivideByZeroError.
+        Зробіть так, щоб функція divide під час спроби ділення на 0 видавала цю помилку.
+        Додайте код, який обробляє виняток.
+        */
+
+        class DivideByZeroError extends Error{
+             constructor(argumentName){
+             super(`Аргумент з ім'ям ${argumentName} містить помилку.Ділення на 0 заборонено`);
+             this.name = "DivideByZeroError";
+             }
+        }
+        class OperandDivide{
+            constructor(operand1,operand2){
+             this.operand1;
+             this.operand2;
+            }
+
+            divide(operand1, operand2) {
+             if(operand1 === 0){
+                 throw new DivideByZeroError("operand1");
+                } 
+             else if(operand2 === 0){
+                 throw new DivideByZeroError("operand2");
+                } 
+             else{
+                 return operand1 / operand2;
+                }  
+            }
+        }
+       
+       let oper = new OperandDivide();
+       
+       try{
+         console.log(oper.divide(10, 5));
+         console.log(oper.divide(1000, 50));
+         console.log(oper.divide(100, 0));
+        }catch(error){
+         console.log(error.name);
+         console.log(error.message);
+         console.log(error.stack);
+        };
+    </script>
+</body>
+
+</html>
